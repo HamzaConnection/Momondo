@@ -1,22 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entity;
 
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Reservation
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="Totalprice")
-    double totalPrice;
+    @Column(name="rID")
+    private int rID;
+    
+    @Column(name="totalPrice")
+    private double totalPrice;
+    
+    @ManyToMany(mappedBy="reservations")
+    private List<Passenger> passengers;
 }

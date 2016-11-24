@@ -1,32 +1,34 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entity;
 
-
-import java.util.Date;
 import javax.annotation.Generated;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-/**
- *
- * @author hamzalaroussi
- */
+@Entity
 public class Flight
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="flightNumber")
+    @Column(name = "flightNumber")
     int flightNumber;
-    @Column(name="seats")
-    int seats; 
-    @Column(name="flightTime")
+    @Column(name = "seats")
+    int seats;
+    @Column(name = "flightTime")
     int flightTime;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Airline airline;
     
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn
+    private Airport origin;
     
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Airport destination;
 }
