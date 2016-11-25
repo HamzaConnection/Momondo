@@ -31,4 +31,66 @@ public class Flight
     
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Airport destination;
+
+    public Flight(){}
+    
+    public int getFlightNumber()
+    {
+        return flightNumber;
+    }
+
+    public void setFlightNumber(int flightNumber)
+    {
+        this.flightNumber = flightNumber;
+    }
+
+    public int getSeats()
+    {
+        return seats;
+    }
+
+    public void setSeats(int seats)
+    {
+        this.seats = seats;
+    }
+
+    public int getFlightTime()
+    {
+        return flightTime;
+    }
+
+    public void setFlightTime(int flightTime)
+    {
+        this.flightTime = flightTime;
+    }
+
+    public Airline getAirline()
+    {
+        return airline;
+    }
+
+    public void setAirline(Airline airline)
+    {
+        this.airline = airline;
+    }
+
+    public Airport getOrigin()
+    {
+        return origin;
+    }
+
+    public void setOrigin(Airport origin)
+    {
+        this.origin = origin;
+    }
+
+    public Airport getDestination()
+    {
+        return destination;
+    }
+
+    public void setDestination(Airport destination)
+    {
+        this.destination = destination;
+    }
 }
