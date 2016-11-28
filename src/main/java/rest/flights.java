@@ -82,7 +82,7 @@ public class flights
         return new Gson().toJson(hey);
     }
     
-    @GET
+    @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{flightID}/{numberOfSeats}/{reserveeName}/{reserveePhone}/{reserveeEmail}/{passengers}")
