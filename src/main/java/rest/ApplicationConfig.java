@@ -8,11 +8,8 @@ package rest;
 import java.util.Set;
 import javax.ws.rs.core.Application;
 
-/**
- *
- * @author hamzalaroussi
- */
-@javax.ws.rs.ApplicationPath("flights")
+
+@javax.ws.rs.ApplicationPath("api")
 public class ApplicationConfig extends Application
 {
 
@@ -32,7 +29,7 @@ public class ApplicationConfig extends Application
      */
     private void addRestResourceClasses(Set<Class<?>> resources)
     {
-        resources.add(rest.ApiResource.class);
+        resources.add(rest.flights.class);
     }
     
 }
