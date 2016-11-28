@@ -36,4 +36,8 @@ public class Tester
         System.out.println(a1.getIATACode()+" added");
         em.close();
     }
+    
+    public static int giveMeTen() {
+    return 10;
+  }
 }
