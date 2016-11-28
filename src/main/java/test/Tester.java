@@ -30,7 +30,7 @@ public class Tester
         a1.setName("London Stansted Airport");
         a1.setCity("London");
         a1.setCountry("United Kingdom");
-        System.out.println("fgt");
+        System.out.println("pls");
         em.persist(a1);
         em.getTransaction().commit();
         System.out.println(a1.getIATACode()+" added");
