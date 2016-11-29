@@ -50,18 +50,12 @@ public class flights
     @Context
     private UriInfo context;
 
-    /**
-     * Creates a new instance of ApiResource
-     */
+   
     public flights()
     {
     }
 
-    /**
-     * Retrieves representation of an instance of rest.flights
-     *
-     * @return an instance of java.lang.String
-     */
+    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("hey")
