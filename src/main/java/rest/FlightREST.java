@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package rest;
 
 import com.google.gson.Gson;
+import facade.RESTFacade;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,50 +32,17 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 import java.io.UnsupportedEncodingException;
 
-/**
- * REST Web Service
- *
- * @author hamzalaroussi
- */
 @Path("flights")
-public class flights
+public class FlightREST
 {
-
+    RESTFacade rf = RESTFacade.getInstance();
     private static final String ENDPOINT = "http://airline-plaul.rhcloud.com/api";
 
     @Context
     private UriInfo context;
 
-    /**
-     * Creates a new instance of ApiResource
-     */
-    public flights()
+    public FlightREST()
     {
-    }
-
-    /**
-     * Retrieves representation of an instance of rest.flights
-     *
-     * @return an instance of java.lang.String
-     */
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("hey")
-    public String getTest()
-    {
-        System.out.println("getTest");
-        return "hey";
-    }
-
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("hey2/{hey}")
-    public String getTest2(String hey)
-    {
-        System.out.println("getTest");
-
-        return new Gson().toJson(hey);
     }
     
     @POST
@@ -104,36 +67,10 @@ public class flights
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{from}/{to}/{date}/{ticket}")
-    public String getFlightsbetween(@PathParam("from") String from, @PathParam("to") String to, @PathParam("date") String date ,@PathParam("ticket") int ticket) throws IOException
+    public String getFlightsBetween(@PathParam("from") String from, @PathParam("to") String to, @PathParam("date") String date ,@PathParam("ticket") int ticket) throws IOException
     {
-        
-        String[] array = date.split("-");
-        Calendar c = Calendar.getInstance();
-
-        int year = Integer.parseInt(array[0]);
-        int month = Integer.parseInt(array[1]);
-        int day = Integer.parseInt(array[2]);
-
-        c.set(year, month - 1, day);
-        String url = ENDPOINT + "/flightinfo/" + from + "/" + to + "/" + formatDate(c.getTime()) + "/" + ticket;
-        System.out.println(url);
-        String response;
-        try
-        {
-            response = sendGet(url);
-            JSONObject o = new JSONObject(response);
-            return o.toString(2);
-        } catch (MalformedURLException ex)
-        {
-            Logger.getLogger(flights.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (HTTPException ex)
-        {
-            Logger.getLogger(flights.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-
-        return "Failed"; // return en fejl besked her
+        System.out.println("Inside getFlightsBetween");
+        return rf.getFlightsBetween(from, to, date, ticket);
     }
 
     @GET
@@ -142,52 +79,19 @@ public class flights
     @Path("/{from}/{date}/{ticket}")
     public String getFlightsFrom(@PathParam("from") String from, @PathParam("date") String date, @PathParam("ticket") int ticket)
     {
-        String[] array = date.split("-");
-        Calendar c = Calendar.getInstance();
-
-        int year = Integer.parseInt(array[0]);
-        int month = Integer.parseInt(array[1]);
-        int day = Integer.parseInt(array[2]);
-
-        c.set(year, month - 1, day);
-
-        //String url = ENDPOINT+"/flightinfo/"+from+"/"+formatDate(date)+"/"+tickets;
-        String url2 = ENDPOINT + "/flightinfo/" + from + "/" + formatDate(c.getTime()) + "/" + ticket;
-
-        System.out.println("From " + from); // skal ikke convertets
-        System.out.println("Array index 0 " + year);
-        System.out.println("Array index 1 " + month);
-        System.out.println("Array index 2 " + day);
-        System.out.println("Date Object " + c.getTime());
-
-        String response;
-
-        try
-        {
-            response = sendGet(url2);
-            JSONObject o = new JSONObject(response);
-
-            return o.toString(2);
-        } catch (IOException ex)
-        {
-            Logger.getLogger(flights.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (HTTPException ex)
-        {
-            Logger.getLogger(flights.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-
+        System.out.println("Inside getFlightsFrom");
+        return rf.getFlightsFrom(from, date, ticket);
     }
 
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public String makeReservation(int flightId)
-    {
-        System.out.println("POSTSOMETHING");
-
-        return "{\"success\":true}";
-    }
+//    @POST
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public String makeReservation(int flightId)
+//    {
+//        System.out.println("POSTSOMETHING");
+//
+//        return "{\"success\":true}";
+//    }
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)

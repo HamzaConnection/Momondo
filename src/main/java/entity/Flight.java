@@ -1,5 +1,6 @@
 package entity;
 
+import java.util.List;
 import javax.annotation.Generated;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,30 +10,47 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Flight
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    
     @Column(name = "flightNumber")
-    int flightNumber;
+    private int flightNumber;
     @Column(name = "seats")
-    int seats;
+    private int seats;
     @Column(name = "flightTime")
-    int flightTime;
+    private int flightTime;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "airlineID")
     private Airline airline;
     
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn
     private Airport origin;
     
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Airport destination;
+    
+    @OneToMany(mappedBy = "flight")
+    private List<FlightInstance> flightInstance;
 
     public Flight(){}
+    
+    public List<FlightInstance> getFlightInstance()
+    {
+        return flightInstance;
+    }
+
+    public void setFlightInstance(List<FlightInstance> flightInstance)
+    {
+        this.flightInstance = flightInstance;
+    }
+
     
     public int getFlightNumber()
     {
