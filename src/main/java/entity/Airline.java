@@ -11,7 +11,6 @@ import javax.persistence.OneToMany;
 @Entity
 public class Airline
 {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "airlineID")
@@ -20,7 +19,38 @@ public class Airline
     @Column(name = "name")
     private String name;
 
-    // Vi skal have flightnumber som fremmet nøgle
     @OneToMany(mappedBy = "airline")
     private List<Flight> flights;
+
+    public Airline(){}
+    
+    public int getAirlineID()
+    {
+        return airlineID;
+    }
+
+    public void setAirlineID(int airlineID)
+    {
+        this.airlineID = airlineID;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public List<Flight> getFlights()
+    {
+        return flights;
+    }
+
+    public void setFlights(List<Flight> flights)
+    {
+        this.flights = flights;
+    } 
 }

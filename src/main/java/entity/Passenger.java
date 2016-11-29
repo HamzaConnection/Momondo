@@ -30,5 +30,49 @@ public class Passenger
       joinColumns=@JoinColumn(name="passenger_ID", referencedColumnName="pID"),
       inverseJoinColumns=@JoinColumn(name="reservation_ID", referencedColumnName="rID"))
     private List<Reservation> reservations;
+
+    public Passenger()
+    {
+    }
+    
+    public int getpID()
+    {
+        return pID;
+    }
+
+    public void setpID(int pID)
+    {
+        this.pID = pID;
+    }
+
+    public int getFirstName()
+    {
+        return firstName;
+    }
+
+    public void setFirstName(int firstName)
+    {
+        this.firstName = firstName;
+    }
+
+    public int getLastName()
+    {
+        return lastName;
+    }
+
+    public void setLastName(int lastName)
+    {
+        this.lastName = lastName;
+    }
+
+    public List<Reservation> getReservations()
+    {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations)
+    {
+        this.reservations = reservations;
+    }
     
 }

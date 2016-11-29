@@ -36,6 +36,11 @@ public class Airport
     
     public Airport()
     {
+    }
+    
+    public Airport(String code)
+    {
+        this.IATACode = code;
     } 
 
     public int getAirportID()

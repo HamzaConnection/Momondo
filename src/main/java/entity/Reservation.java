@@ -21,4 +21,38 @@ public class Reservation
     
     @ManyToMany(mappedBy="reservations")
     private List<Passenger> passengers;
+
+    public Reservation()
+    {
+    }
+
+    public int getrID()
+    {
+        return rID;
+    }
+
+    public void setrID(int rID)
+    {
+        this.rID = rID;
+    }
+
+    public double getTotalPrice()
+    {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice)
+    {
+        this.totalPrice = totalPrice;
+    }
+
+    public List<Passenger> getPassengers()
+    {
+        return passengers;
+    }
+
+    public void setPassengers(List<Passenger> passengers)
+    {
+        this.passengers = passengers;
+    }
 }

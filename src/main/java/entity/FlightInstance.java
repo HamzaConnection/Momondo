@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -29,9 +30,22 @@ public class FlightInstance
     
     @Column(name="price")
     private double price;
+    
+    @ManyToOne
+    private Flight flight;
 
     public FlightInstance(){}
     
+    public Flight getFlight()
+    {
+        return flight;
+    }
+
+    public void setFlight(Flight flight)
+    {
+        this.flight = flight;
+    }
+
     public int getFlightId()
     {
         return flightId;
