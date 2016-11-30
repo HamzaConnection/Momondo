@@ -15,7 +15,7 @@ public class FlightInstance
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="flightID")
+    @Column(name="id")
     private int flightId;
     
     @Column(name="date")
@@ -41,7 +41,7 @@ public class FlightInstance
         return flight;
     }
 
-    public void setFlight(Flight flight)
+    public void addFlight(Flight flight)
     {
         this.flight = flight;
     }

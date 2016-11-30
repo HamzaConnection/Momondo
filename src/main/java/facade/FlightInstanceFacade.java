@@ -1,5 +1,7 @@
 package facade;
 
+import entity.Flight;
+import entity.FlightInstance;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -23,13 +25,31 @@ public class FlightInstanceFacade
         return instance;
     }
 
-    public FlightInstanceFacade addInstance(FlightInstanceFacade fi)
+    public FlightInstance addFlightInstance(FlightInstance fi)
     {
         EntityManager em = emf.createEntityManager();
         try
         {
             em.getTransaction().begin();
             em.persist(fi);
+            em.getTransaction().commit();
+            return fi;
+        } finally
+        {
+            em.close();
+        }
+    }
+    
+    public FlightInstance addFlightInstance(FlightInstance fi, Flight f)
+    {
+        EntityManager em = emf.createEntityManager();
+        try
+        {
+            em.getTransaction().begin();
+            fi.addFlight(f);
+            f.addFlightInstance(fi);
+            em.merge(fi);
+            em.merge(f);
             em.getTransaction().commit();
             return fi;
         } finally
