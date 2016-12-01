@@ -1,5 +1,6 @@
 package entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
 import javax.persistence.CascadeType;
@@ -20,7 +21,7 @@ public class Flight
     private int id;
     
     @Column(name = "flightNumber")
-    private int flightNumber;
+    private String flightNumber;
     @Column(name = "seats")
     private int seats;
     @Column(name = "flightTime")
@@ -37,27 +38,37 @@ public class Flight
     private Airport destination;
     
     @OneToMany(mappedBy = "flight")
-    private List<FlightInstance> flightInstance;
+    private List<FlightInstance> flightInstance = new ArrayList();
 
     public Flight(){}
+    
+    public int getId()
+    {
+        return id;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
+    }
     
     public List<FlightInstance> getFlightInstance()
     {
         return flightInstance;
     }
 
-    public void setFlightInstance(List<FlightInstance> flightInstance)
+    public void addFlightInstance(FlightInstance fi)
     {
-        this.flightInstance = flightInstance;
+        this.flightInstance.add(fi);
     }
 
     
-    public int getFlightNumber()
+    public String getFlightNumber()
     {
         return flightNumber;
     }
 
-    public void setFlightNumber(int flightNumber)
+    public void setFlightNumber(String flightNumber)
     {
         this.flightNumber = flightNumber;
     }

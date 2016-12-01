@@ -1,5 +1,6 @@
 package entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +21,7 @@ public class Airline
     private String name;
 
     @OneToMany(mappedBy = "airline")
-    private List<Flight> flights;
+    private List<Flight> flights = new ArrayList();
 
     public Airline(){}
     
@@ -49,8 +50,8 @@ public class Airline
         return flights;
     }
 
-    public void setFlights(List<Flight> flights)
+    public void addFlight(Flight f)
     {
-        this.flights = flights;
-    } 
+        this.flights.add(f);
+    }
 }

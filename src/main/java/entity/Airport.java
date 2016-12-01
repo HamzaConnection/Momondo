@@ -1,5 +1,6 @@
 package entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,10 +30,10 @@ public class Airport
     private String city;
 
     @OneToMany(mappedBy = "origin")
-    private List<Flight> departing;
+    private List<Flight> departing = new ArrayList();
     
     @OneToMany(mappedBy = "destination")
-    private List<Flight> arriving;
+    private List<Flight> arriving = new ArrayList();
     
     public Airport()
     {
@@ -102,4 +103,25 @@ public class Airport
     {
         this.city = city;
     }
+
+    public List<Flight> getDeparting()
+    {
+        return departing;
+    }
+
+    public void addDepartingFlight(Flight f)
+    {
+        this.departing.add(f);
+    }
+
+    public List<Flight> getArriving()
+    {
+        return arriving;
+    }
+
+    public void addArrivingFlight(Flight f)
+    {
+        this.arriving.add(f);
+    }
+    
 }

@@ -1,5 +1,6 @@
 package entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,7 +30,7 @@ public class Passenger
       name="RESERVATION_PASSENGER",
       joinColumns=@JoinColumn(name="passenger_ID", referencedColumnName="pID"),
       inverseJoinColumns=@JoinColumn(name="reservation_ID", referencedColumnName="rID"))
-    private List<Reservation> reservations;
+    private List<Reservation> reservations = new ArrayList();
 
     public Passenger()
     {

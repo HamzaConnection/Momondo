@@ -1,7 +1,11 @@
 package test;
 
+import entity.Airline;
 import entity.Airport;
+import entity.Flight;
+import facade.AirlineFacade;
 import facade.AirportFacade;
+import facade.FlightFacade;
 import facade.ReservationFacade;
 import facade.RESTFacade;
 import javax.persistence.EntityManager;
@@ -11,6 +15,8 @@ import javax.persistence.Persistence;
 public class Tester
 {   
     static AirportFacade apf = AirportFacade.getInstance();
+    static AirlineFacade alf = AirlineFacade.getInstance();
+    static FlightFacade ff = FlightFacade.getInstance();
     
     public static void main(String[] args)
     {
@@ -28,14 +34,24 @@ public class Tester
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("momondo");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        Airport a1 = new Airport();
-        a1.setIATACode("STN");
-        a1.setName("London Stansted Airport");
-        a1.setCity("London");
-        a1.setCountry("United Kingdom");
+        Airport ap1 = new Airport();
+        ap1.setIATACode("STN");     
+        Airport ap2 = new Airport();
+        ap2.setIATACode("CPH");
+        Airline al1 = new Airline();
+        al1.setName("SAS");
+        Flight f1 = new Flight();
+        f1.setFlightNumber("COL3257");
+        
         System.out.println("pls");
-        apf.addAirport(a1);
-        System.out.println(a1.getIATACode() + " added");
+        apf.addAirport(ap1);
+        apf.addAirport(ap2);
+        alf.addAirline(al1);
+        ff.addFlight(f1);
+        ff.addDestination(f1, ap2);
+        ff.addOrigin(f1, ap1);
+        ff.addAirline(f1, al1);
+        System.out.println("fgt");
         em.close();
     }
 

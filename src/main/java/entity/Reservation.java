@@ -1,5 +1,6 @@
 package entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +21,7 @@ public class Reservation
     private double totalPrice;
     
     @ManyToMany(mappedBy="reservations")
-    private List<Passenger> passengers;
+    private List<Passenger> passengers  = new ArrayList();
 
     public Reservation()
     {
