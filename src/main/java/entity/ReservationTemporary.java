@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 public class ReservationTemporary
 {
-    int flightID; 
+    String flightID; 
     int numberOfSeats; 
     String reserveeName; 
     int reservePhone;
     String reserveeEmail; 
     ArrayList<Passenger> passengers = new ArrayList(); 
 
-    public ReservationTemporary(int id, int noSeats, String name, int phone, String email, ArrayList<Passenger> passenger)
+    public ReservationTemporary(String id, int noSeats, String name, int phone, String email, ArrayList<Passenger> passenger)
     {
         flightID = id; 
         numberOfSeats = noSeats; 
@@ -21,12 +21,12 @@ public class ReservationTemporary
         passengers = passenger; 
     }
     
-    public int getFlightId()
+    public String getFlightId()
     {
         return flightID;
     }
 
-    public void setFlightId(int flightId)
+    public void setFlightId(String flightId)
     {
         this.flightID = flightId;
     }
@@ -71,12 +71,12 @@ public class ReservationTemporary
         this.reserveeEmail = reserveeEmail;
     }
 
-    public int getFlightID()
+    public String getFlightID()
     {
         return flightID;
     }
 
-    public void setFlightID(int flightID)
+    public void setFlightID(String flightID)
     {
         this.flightID = flightID;
     }

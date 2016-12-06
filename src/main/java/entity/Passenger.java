@@ -20,10 +20,10 @@ public class Passenger
     int pID;
     
     @Column(name="firstName")
-    int firstName;
+    String firstName;
     
     @Column(name="lastName")
-    int lastName;
+    String lastName;
     
     @ManyToMany
     @JoinTable(
@@ -36,6 +36,7 @@ public class Passenger
     {
     }
     
+    
     public int getpID()
     {
         return pID;
@@ -46,22 +47,22 @@ public class Passenger
         this.pID = pID;
     }
 
-    public int getFirstName()
+    public String getFirstName()
     {
         return firstName;
     }
 
-    public void setFirstName(int firstName)
+    public void setFirstName(String firstName)
     {
         this.firstName = firstName;
     }
 
-    public int getLastName()
+    public String getLastName()
     {
         return lastName;
     }
 
-    public void setLastName(int lastName)
+    public void setLastName(String lastName)
     {
         this.lastName = lastName;
     }
