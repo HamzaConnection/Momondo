@@ -21,16 +21,6 @@ public class ReservationTemporary
         passengers = passenger; 
     }
     
-    public String getFlightId()
-    {
-        return flightID;
-    }
-
-    public void setFlightId(String flightId)
-    {
-        this.flightID = flightId;
-    }
-
     public int getNumberOfSeats()
     {
         return numberOfSeats;
