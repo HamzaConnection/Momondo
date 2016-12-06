@@ -1,6 +1,8 @@
 package rest;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import facade.RESTFacade;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -35,6 +37,7 @@ import java.io.UnsupportedEncodingException;
 @Path("flights")
 public class FlightREST
 {
+
     RESTFacade rf = RESTFacade.getInstance();
     private static final String ENDPOINT = "http://airline-plaul.rhcloud.com/api";
 
@@ -45,29 +48,81 @@ public class FlightREST
     {
     }
     
+    /*@POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{flightId}")
+    public String test(@PathParam("flightId") String from) throws IOException
+    {
+        System.out.println("Inside getFlightsBetween");
+        return from;
+    }
+    */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("/{flightID}/{numberOfSeats}/{reserveeName}/{reserveePhone}/{reserveeEmail}/{passengers}")
-    public String makeReservation(@PathParam("from") String flightID, @PathParam("numberOfSeats") int numberOfSeats, @PathParam("reserveeName") String reserveeName, @PathParam("reserveePhone") String reserveePhone, @PathParam("reserveeEmail") String reserveeEmail, @PathParam("passengers")JSONArray passengers) throws MalformedURLException, ProtocolException, IOException, UnsupportedEncodingException, JSONException{
-		String url = ENDPOINT+"/flightreservation";
-		JSONObject obj = new JSONObject();
-		obj.put("flightID", flightID);
-		obj.put("numberOfSeats", numberOfSeats);
-		obj.put("reserveeName", reserveeName);
-		obj.put("reservePhone", reserveePhone);
-		obj.put("reserveeEmail", reserveeEmail);
-		obj.put("passengers", passengers);
-		String response = sendPost(url, obj.toString());
-		JSONObject o = new JSONObject(response);
-		return o.toString(2);
-	}
+    @Path("/{flightID}")
+    public String makeReservation(@PathParam("flightID") String flightID, String content) throws MalformedURLException, ProtocolException, IOException, UnsupportedEncodingException, JSONException
+    {
+        String url = ENDPOINT + "/flightreservation";
+        System.out.println("Inside MakeReservation");
+        JSONObject obj = new JSONObject();
+        obj.put("flightID", flightID);
+        obj.put("numberOfSeats", 2);
+        obj.put("reserveeName", "hey");
+        obj.put("reservePhone", 23432);
+        obj.put("reserveeEmail", "hamza@gmail.com");
+
+        JSONArray passengers = new JSONArray();
+        JSONObject a = new JSONObject();
+        a.put("firstName", "Naum");
+        a.put("lastName", "Taneski");
+        passengers.put(a);
+        JSONObject b = new JSONObject();
+        b.put("firstName", "Mila");
+        b.put("lastName", "Milkovska Taneska");
+        passengers.put(b);
+
+        obj.put("passengers", passengers);
+        String response = sendPost(url, obj.toString());
+        JSONObject o = new JSONObject(response);
+        System.out.println("JSON " + content);
+        return o.toString(2);
+
+        /*	
+                JsonObject body = new JsonParser().parse(content).getAsJsonObject(); // laver string om til JsonObject
+                String firstName = "";
+                String lastName = "";
+              // hvad gør du når der er flere firstnames og lastnames  
+              if (body.has("passengers"))
+        {
+            JSONArray ja = body.get("passengers"); // find ud af hvordan man få fat i arrayest.
+        }
+ 
+              if (body.has("firstName"))
+        {
+            firstName = body.get("firstName").getAsString();
+        }
+                
+                
+                   if (body.has("lastName"))
+        {
+            lastName = body.get("lastName").getAsString();
+        }
+         
+        JSONObject obj = new JSONObject();
+        obj.put("flightID", flightID);
+
+        //JSONArray passengersArray = new JSONArray();
+         */
+
+    }
 
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{from}/{to}/{date}/{ticket}")
-    public String getFlightsBetween(@PathParam("from") String from, @PathParam("to") String to, @PathParam("date") String date ,@PathParam("ticket") int ticket) throws IOException
+    public String getFlightsBetween(@PathParam("from") String from, @PathParam("to") String to, @PathParam("date") String date, @PathParam("ticket") int ticket) throws IOException
     {
         System.out.println("Inside getFlightsBetween");
         return rf.getFlightsBetween(from, to, date, ticket);
@@ -92,7 +147,6 @@ public class FlightREST
 //
 //        return "{\"success\":true}";
 //    }
-
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public void putXml(String content)
