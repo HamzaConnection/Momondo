@@ -15,12 +15,13 @@ public class FlightInstance
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
-    private int flightId;
+    private int id;
+    
+    @Column(name="flightID")
+    private String flightID;
     
     @Column(name="date")
-    @Temporal(TemporalType.DATE)
-    private Date date;
+    private String date;
     
     @Column(name="time")
     private int time;
@@ -46,22 +47,22 @@ public class FlightInstance
         this.flight = flight;
     }
 
-    public int getFlightId()
+    public String getFlightID()
     {
-        return flightId;
+        return flightID;
     }
 
-    public void setFlightId(int flightId)
+    public void setFlightID(String flightID)
     {
-        this.flightId = flightId;
+        this.flightID = flightID;
     }
 
-    public Date getDate()
+    public String getDate()
     {
         return date;
     }
 
-    public void setDate(Date date)
+    public void setDate(String date)
     {
         this.date = date;
     }
