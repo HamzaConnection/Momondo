@@ -2,7 +2,7 @@ package entity;
 
 public class ReservationTemporary
 {
-    String flightId; 
+    String flightID; 
     int numberOfSeats; 
     String reserveeName; 
     String reservePhone;
@@ -10,7 +10,7 @@ public class ReservationTemporary
 
     public ReservationTemporary(String id, int noSeats, String name, String phone, String email)
     {
-        flightId = id; 
+        flightID = id; 
         numberOfSeats = noSeats; 
         reserveeName = name; 
         reservePhone = phone; 
@@ -19,12 +19,12 @@ public class ReservationTemporary
     
     public String getFlightId()
     {
-        return flightId;
+        return flightID;
     }
 
     public void setFlightId(String flightId)
     {
-        this.flightId = flightId;
+        this.flightID = flightId;
     }
 
     public int getNumberOfSeats()
