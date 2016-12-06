@@ -1,28 +1,32 @@
 package entity;
 
+import java.util.ArrayList;
+
 public class ReservationTemporary
 {
-    String flightID; 
+    int flightID; 
     int numberOfSeats; 
     String reserveeName; 
-    String reservePhone;
+    int reservePhone;
     String reserveeEmail; 
+    ArrayList<Passenger> passengers = new ArrayList(); 
 
-    public ReservationTemporary(String id, int noSeats, String name, String phone, String email)
+    public ReservationTemporary(int id, int noSeats, String name, int phone, String email, ArrayList<Passenger> passenger)
     {
         flightID = id; 
         numberOfSeats = noSeats; 
         reserveeName = name; 
         reservePhone = phone; 
         reserveeEmail = email; 
+        passengers = passenger; 
     }
     
-    public String getFlightId()
+    public int getFlightId()
     {
         return flightID;
     }
 
-    public void setFlightId(String flightId)
+    public void setFlightId(int flightId)
     {
         this.flightID = flightId;
     }
@@ -47,12 +51,12 @@ public class ReservationTemporary
         this.reserveeName = reserveeName;
     }
 
-    public String getReservePhone()
+    public int getReservePhone()
     {
         return reservePhone;
     }
 
-    public void setReservePhone(String reservePhone)
+    public void setReservePhone(int reservePhone)
     {
         this.reservePhone = reservePhone;
     }
@@ -66,6 +70,27 @@ public class ReservationTemporary
     {
         this.reserveeEmail = reserveeEmail;
     }
+
+    public int getFlightID()
+    {
+        return flightID;
+    }
+
+    public void setFlightID(int flightID)
+    {
+        this.flightID = flightID;
+    }
+
+    public ArrayList<Passenger> getPassengers()
+    {
+        return passengers;
+    }
+
+    public void setPassengers(ArrayList<Passenger> passengers)
+    {
+        this.passengers = passengers;
+    }
+    
     
     
 }
