@@ -21,7 +21,7 @@ public class Tester
     public static void main(String[] args)
     {
         Build();
-        Test();
+        //Test();
     }
 
     public static void Build()
