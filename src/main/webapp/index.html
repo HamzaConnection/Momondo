@@ -15,11 +15,17 @@
             <th>Date</th>
             <th>Passengers</th>
             <tr>
+            
                 <td><input type="text" id="destination" placeholder="Destination" ng-model="destination"></td>
                 <td><input type="text" id="origin" placeholder="Origin" ng-model="origin"></td>
                 <td><input type="text" id="date" placeholder="YYYY-MM-DD" ng-model="date"></td>
                 <td><input type="number" id="passengers" placeholder="Number of seats" ng-model="passengers"></td>
                 <td><button type="button" id="searchB" ng-click="search()">Search</button></td>
+            </tr></table>
+        <table ng-show="show">  
+            <tr ng-repeat="flights in data">
+            <td>{{data.flights}}</td>
+            <td>{{data.flights.destination}}</td>
             </tr>
         </table>
     </body>
