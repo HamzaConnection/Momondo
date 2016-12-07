@@ -16,6 +16,16 @@ public class FlightInstance
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    public FlightInstance(String flightID, int time, int availableSeats, double price, Flight flight)
+    {
+        this.flightID = flightID;
+        this.date = date;
+        this.time = time;
+        this.availableSeats = availableSeats;
+        this.price = price;
+        this.flight = flight;
+    }
     
     @Column(name="flightID")
     private String flightID;

@@ -3,6 +3,8 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import entity.FlightInstance;
+import entity.ReservationTemporary;
 import facade.RESTFacade;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -47,7 +49,7 @@ public class FlightREST
     public FlightREST()
     {
     }
-    
+
     /*@POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -57,7 +59,7 @@ public class FlightREST
         System.out.println("Inside getFlightsBetween");
         return from;
     }
-    */
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -66,27 +68,29 @@ public class FlightREST
     {
         String url = ENDPOINT + "/flightreservation";
         System.out.println("Inside MakeReservation");
+        ReservationTemporary res = new Gson().fromJson(content, ReservationTemporary.class);
+
         JSONObject obj = new JSONObject();
         obj.put("flightID", flightID);
-        obj.put("numberOfSeats", 2);
-        obj.put("reserveeName", "hey");
-        obj.put("reservePhone", 23432);
-        obj.put("reserveeEmail", "hamza@gmail.com");
+        obj.put("numberOfSeats", res.getNumberOfSeats());
+        obj.put("reserveeName", res.getReserveeName());
+        obj.put("reservePhone", res.getReservePhone());
+        obj.put("reserveeEmail", res.getReserveeEmail());
 
         JSONArray passengers = new JSONArray();
-        JSONObject a = new JSONObject();
-        a.put("firstName", "Naum");
-        a.put("lastName", "Taneski");
-        passengers.put(a);
-        JSONObject b = new JSONObject();
-        b.put("firstName", "Mila");
-        b.put("lastName", "Milkovska Taneska");
-        passengers.put(b);
+        for (int i = 0; i < res.getPassengers().size(); i++)
+        {
+            JSONObject a = new JSONObject();
+            a.put("firstName", res.getPassengers().get(i).getFirstName());
+            a.put("lastName", res.getPassengers().get(i).getLastName());
+            passengers.put(a);
+        }
 
+        
         obj.put("passengers", passengers);
         String response = sendPost(url, obj.toString());
         JSONObject o = new JSONObject(response);
-        System.out.println("JSON " + content);
+
         return o.toString(2);
 
         /*	
@@ -115,7 +119,6 @@ public class FlightREST
 
         //JSONArray passengersArray = new JSONArray();
          */
-
     }
 
     @GET
