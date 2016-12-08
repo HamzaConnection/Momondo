@@ -1,10 +1,13 @@
 package facade;
 
+import com.google.gson.Gson;
+import entity.ReservationTemporary;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
@@ -15,6 +18,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class RESTFacade
@@ -98,12 +103,46 @@ public class RESTFacade
         return "Failed to get flights from "+from+" to "+to;
     }
 
+    
+    public String makeReservation( String flightID, String content) throws MalformedURLException, ProtocolException, IOException, UnsupportedEncodingException, JSONException
+    {
+        String url = ENDPOINT + "/flightreservation";
+        System.out.println("Inside MakeReservation");
+        ReservationTemporary res = new Gson().fromJson(content, ReservationTemporary.class);
+
+        JSONObject obj = new JSONObject();
+        obj.put("flightID", flightID);
+        obj.put("numberOfSeats", res.getNumberOfSeats());
+        obj.put("reserveeName", res.getReserveeName());
+        obj.put("reservePhone", res.getReservePhone());
+        obj.put("reserveeEmail", res.getReserveeEmail());
+
+        JSONArray passengers = new JSONArray();
+        for (int i = 0; i < res.getPassengers().size(); i++)
+        {
+            JSONObject a = new JSONObject();
+            a.put("firstName", res.getPassengers().get(i).getFirstName());
+            a.put("lastName", res.getPassengers().get(i).getLastName());
+            passengers.put(a);
+        }
+
+        
+        obj.put("passengers", passengers);
+        String response = sendPost(url, obj.toString());
+        JSONObject o = new JSONObject(response);
+
+        return o.toString(2);
+
+    }
+    
+    
     private String formatDate(Date date)
     {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         return df.format(date);
     }
 
+    
     private class HTTPException extends Exception
     {
 

@@ -66,59 +66,8 @@ public class FlightREST
     @Path("/{flightID}")
     public String makeReservation(@PathParam("flightID") String flightID, String content) throws MalformedURLException, ProtocolException, IOException, UnsupportedEncodingException, JSONException
     {
-        String url = ENDPOINT + "/flightreservation";
-        System.out.println("Inside MakeReservation");
-        ReservationTemporary res = new Gson().fromJson(content, ReservationTemporary.class);
+        return rf.makeReservation(flightID, content);
 
-        JSONObject obj = new JSONObject();
-        obj.put("flightID", flightID);
-        obj.put("numberOfSeats", res.getNumberOfSeats());
-        obj.put("reserveeName", res.getReserveeName());
-        obj.put("reservePhone", res.getReservePhone());
-        obj.put("reserveeEmail", res.getReserveeEmail());
-
-        JSONArray passengers = new JSONArray();
-        for (int i = 0; i < res.getPassengers().size(); i++)
-        {
-            JSONObject a = new JSONObject();
-            a.put("firstName", res.getPassengers().get(i).getFirstName());
-            a.put("lastName", res.getPassengers().get(i).getLastName());
-            passengers.put(a);
-        }
-
-        
-        obj.put("passengers", passengers);
-        String response = sendPost(url, obj.toString());
-        JSONObject o = new JSONObject(response);
-
-        return o.toString(2);
-
-        /*	
-                JsonObject body = new JsonParser().parse(content).getAsJsonObject(); // laver string om til JsonObject
-                String firstName = "";
-                String lastName = "";
-              // hvad gør du når der er flere firstnames og lastnames  
-              if (body.has("passengers"))
-        {
-            JSONArray ja = body.get("passengers"); // find ud af hvordan man få fat i arrayest.
-        }
- 
-              if (body.has("firstName"))
-        {
-            firstName = body.get("firstName").getAsString();
-        }
-                
-                
-                   if (body.has("lastName"))
-        {
-            lastName = body.get("lastName").getAsString();
-        }
-         
-        JSONObject obj = new JSONObject();
-        obj.put("flightID", flightID);
-
-        //JSONArray passengersArray = new JSONArray();
-         */
     }
 
     @GET
