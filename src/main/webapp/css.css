@@ -5,3 +5,15 @@ body{
 th{
     text-align: left;
 }
+.select{
+    width: 150px
+}
+.seats{
+    width: 80px
+}
+.date{
+    width: 80px
+}
+.booking{
+    padding-right: 1cm;
+}

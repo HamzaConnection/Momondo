@@ -15,17 +15,43 @@
             <th>Date</th>
             <th>Passengers</th>
             <tr>
-            
-                <td><input type="text" id="destination" placeholder="Destination" ng-model="destination"></td>
-                <td><input type="text" id="origin" placeholder="Origin" ng-model="origin"></td>
-                <td><input type="text" id="date" placeholder="YYYY-MM-DD" ng-model="date"></td>
-                <td><input type="number" id="passengers" placeholder="Number of seats" ng-model="passengers"></td>
+                <td><select class="select" type="text" id="destination" ng-model="destination">
+                        <option selected="selected" disabled hidden>Choose destination</option>
+                        <option value="CPH">Copenhagen</option>
+                        <option value="STN">London</option>
+                        <option value="SXF">Berlin</option>
+                        <option value="BCN">Barcelona</option>
+                        <option value="CDG">Paris</option></select></td>
+                <td><select class=select type="text" id="origin" ng-model="origin">
+                        <option selected="selected" disabled hidden>Choose origin</option>
+                        <option value="CPH">Copenhagen</option>
+                        <option value="STN">London</option>
+                        <option value="SXF">Berlin</option>
+                        <option value="BCN">Barcelona</option>
+                        <option value="CDG">Paris</option></select></td>
+                <td><input class="date" type="text" id="date" placeholder="YYYY-MM-DD" ng-model="date"></td>
+                <td><input class="seats" type="number" id="passengers" placeholder="Passengers" ng-model="passengers"></td>
                 <td><button type="button" id="searchB" ng-click="search()">Search</button></td>
-            </tr></table>
+            </tr>
+        </table>
+        <br><br>
         <table ng-show="show">  
-            <tr ng-repeat="flights in data">
-            <td>{{data.flights}}</td>
-            <td>{{data.flights.destination}}</td>
+            <th>Airline</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Price</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Travel time</th>
+            <tr ng-repeat="flights in data.flights">               
+                <td class="booking">{{data.airline}}</td>
+                <td class="booking">{{travelDate[$index]}}</td>
+                <td class="booking">{{time[$index]}}</td>
+                <td class="booking">€{{flights.totalPrice}}</td>
+                <td>{{flights.origin}} --></td>
+                <td class="booking">{{flights.destination}}</td>
+                <td>{{flights.traveltime}} minutes</td>
+                <td><button style="size: " type="button" class="bookB" ng-click="book()">Book now!</button><td>
             </tr>
         </table>
     </body>
